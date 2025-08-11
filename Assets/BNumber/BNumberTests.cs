@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using System;
 using System.Collections.Generic;
-using Modules.Patterns;
 
 public class BNumberTests : MonoBehaviour
 {
@@ -376,20 +375,20 @@ public class BNumberTests : MonoBehaviour
             
             
             // 测试运算性能2
-            start = DateTime.Now;
-            BigNumber aa = BigNumber.Parse("123.45K");
-            BigNumber bb = BigNumber.Parse("67.89M");
-            for (int i = 0; i < iterations; i++)
-            {
-                BigNumber result = aa * bb + aa;
-            }
-
-            TimeSpan oldOperationTime = DateTime.Now - start;
+            // start = DateTime.Now;
+            // BigNumber aa = BigNumber.Parse("123.45K");
+            // BigNumber bb = BigNumber.Parse("67.89M");
+            // for (int i = 0; i < iterations; i++)
+            // {
+            //     BigNumber result = aa * bb + aa;
+            // }
+            //
+            // TimeSpan oldOperationTime = DateTime.Now - start;
 
             LogTestInfo($"{iterations}次创建: {createTime.TotalMilliseconds:F2}ms");
             LogTestInfo($"{iterations}次运算: {operationTime.TotalMilliseconds:F2}ms");
             LogTestInfo($"{iterations}次静态方法运算: {staticMethodTime.TotalMilliseconds:F2}ms");
-            LogTestInfo($"{iterations}次老方法运算: {oldOperationTime.TotalMilliseconds:F2}ms");
+            // LogTestInfo($"{iterations}次老方法运算: {oldOperationTime.TotalMilliseconds:F2}ms");
 
             // 简单性能断言（根据实际情况调整阈值）
             AssertTrue(createTime.TotalSeconds < 1, "创建性能测试");
