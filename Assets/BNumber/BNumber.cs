@@ -43,23 +43,14 @@ public class BNumber : IComparable<BNumber>, IEquatable<BNumber>, ISerializable
         AddUnit(9, "B");
         AddUnit(12, "T");
 
-        // 2. 一位小写字母单位（a-z），指数从15开始（12+3），步长3
-        // 范围：15 (a) → 90 (z)（15 + 25*3 = 90）
-        for (char c = 'a'; c <= 'z'; c++)
+        // 2. 两位小写字母单位（AA-ZZ），指数从15开始，步长3
+        // 确保优先级低于一位字母，范围：15 (AA) → 2040 (ZZ)（15 + 675*3 = 2040）
+        for (char first = 'A'; first <= 'Z'; first++)
         {
-            int exponent = 15 + (c - 'a') * 3;
-            AddUnit(exponent, c.ToString());
-        }
-
-        // 3. 两位小写字母单位（aa-zz），指数从93开始（90+3），步长3
-        // 避免与一位字母的z(90)重叠，确保优先级低于一位字母
-        // 范围：93 (aa) → 2118 (zz)（93 + 675*3 = 2118）
-        for (char first = 'a'; first <= 'z'; first++)
-        {
-            for (char second = 'a'; second <= 'z'; second++)
+            for (char second = 'A'; second <= 'Z'; second++)
             {
-                int index = (first - 'a') * 26 + (second - 'a');
-                int exponent = 93 + index * 3; // 关键修正：起始指数从93开始
+                int index = (first - 'A') * 26 + (second - 'A');
+                int exponent = 15 + index * 3;
                 AddUnit(exponent, $"{first}{second}");
             }
         }
